@@ -9,9 +9,7 @@ using Persistence;
 
 namespace API.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class UsersController: Controller
+    public class UsersController: BaseApiController
     {
         private DatabaseContext dbContext { get; set; }
         
