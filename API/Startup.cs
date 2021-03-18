@@ -13,6 +13,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Persistence;
+using Services;
+using Services.Interfaces;
 
 namespace API
 {
@@ -32,7 +34,7 @@ namespace API
             {
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"));
             });
-            
+            services.AddScoped<ITokenService, TokenService>(); 
             services.AddCors();
             services.AddControllers();
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "API", Version = "v1"}); });
