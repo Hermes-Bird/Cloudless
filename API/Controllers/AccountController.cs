@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Data;
 using Data.DTOs;
+using Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
@@ -14,34 +15,35 @@ namespace API.Controllers
 {
     public class AccountController : BaseApiController
     {
-        private readonly DatabaseContext Context;
+        private readonly DatabaseContext _context;
         private readonly ITokenService _tokenService;
 
         public AccountController(DatabaseContext context, ITokenService tokenService)
         {
-            Context = context;
+            _context = context;
             _tokenService = tokenService;
         }
 
         [HttpPost("register")]
         public async Task<ActionResult<User>> Register([FromBody] RegisterDto registerDto)
         {
-            if (await UserExists(registerDto.Username))
+            if (await UserExists(registerDto.Email))
             {
-                return BadRequest("Username is taken");
+                return BadRequest("Email is already taken");
             }
 
             using var hmac = new HMACSHA512();
 
             var user = new User
             {
-                Username = registerDto.Username.ToLower(),
+                Username = registerDto.Username,
+                Email =  registerDto.Email,
                 PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
                 PasswordSalt = hmac.Key
             };
 
-            await Context.Users.AddAsync(user);
-            await Context.SaveChangesAsync();
+            await _context.Users.AddAsync(user);
+            await _context.SaveChangesAsync();
 
             return user;
         }
@@ -49,12 +51,11 @@ namespace API.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login([FromBody] LoginDto loginDto)
         {
-            var user = await Context.Users.SingleOrDefaultAsync(u => u.Username == loginDto.Username.ToLower());
+            var user = await _context.Users.SingleOrDefaultAsync(u => u.Email == loginDto.Email);
 
-            if (user == null) return Unauthorized("Invalid username");
+            if (user == null) return Unauthorized("Invalid email");
 
             var hmac = new HMACSHA512(user.PasswordSalt);
-
             var hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginDto.Password));
 
             for (int i = 0; i < hash.Length; i++)
@@ -69,9 +70,9 @@ namespace API.Controllers
             };
         }
 
-        private async Task<bool> UserExists(string username)
+        private async Task<bool> UserExists(string email)
         {
-            return await Context.Users.AnyAsync(u => u.Username == username.ToLower());
+            return await _context.Users.AnyAsync(u => u.Email == email);
         }
     }
 }

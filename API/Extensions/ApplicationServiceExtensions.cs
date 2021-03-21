@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Persistence;
 using Services.Interfaces;
+using Services.Repositories;
 
 namespace Services.Extensions
 {
@@ -11,6 +12,7 @@ namespace Services.Extensions
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
         {
             services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddDbContext<DatabaseContext>(options =>
             {
                 options.UseNpgsql(config.GetConnectionString("DefaultConnection"));

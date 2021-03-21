@@ -3,35 +3,37 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Data;
+using Data.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
+using Services.Interfaces;
 
 namespace API.Controllers
 {
     public class UsersController: BaseApiController
     {
-        private DatabaseContext _dbContext { get;}
+        private readonly IUserRepository _userRepository;
+       
         
-        
-        public UsersController(DatabaseContext context)
+        public UsersController(IUserRepository userRepository)
         {
-            _dbContext = context;
+            _userRepository = userRepository;
         }
 
         [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            return await _dbContext.Users.ToListAsync();
+            return Ok(await _userRepository.GetUsersAsync());
         }
 
         [Authorize]
-        [HttpGet("{id}")]
+        [HttpGet("{id}")] 
         public async Task<ActionResult<User>> GetUser(int id)
         {
-           return await _dbContext.Users.FindAsync(id);
+           return await _userRepository.GetUserByIdAsync(id);
         } 
     }
 }
