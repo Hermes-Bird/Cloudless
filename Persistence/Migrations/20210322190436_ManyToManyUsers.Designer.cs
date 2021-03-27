@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20210322190436_ManyToManyUsers")]
+    partial class ManyToManyUsers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,45 +48,23 @@ namespace Persistence.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Data.Models.UserContact", b =>
+            modelBuilder.Entity("UserUser", b =>
                 {
-                    b.Property<int>("UserId")
+                    b.Property<int>("ContactsId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("ContactId")
-                        .HasColumnType("integer");
+                    b.HasIndex("ContactsId");
 
-                    b.HasKey("UserId", "ContactId");
-
-                    b.HasIndex("ContactId");
-
-                    b.ToTable("Contacts");
+                    b.ToTable("UserUser");
                 });
 
-            modelBuilder.Entity("Data.Models.UserContact", b =>
+            modelBuilder.Entity("UserUser", b =>
                 {
-                    b.HasOne("Data.Models.User", "Contact")
-                        .WithMany("InContacts")
-                        .HasForeignKey("ContactId")
+                    b.HasOne("Data.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("ContactsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("Data.Models.User", "User")
-                        .WithMany("Contacts")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Contact");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Data.Models.User", b =>
-                {
-                    b.Navigation("Contacts");
-
-                    b.Navigation("InContacts");
                 });
 #pragma warning restore 612, 618
         }

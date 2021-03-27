@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace Services.Extensions
+namespace API.Extensions
 {
     public static class StringExtentesions
     {

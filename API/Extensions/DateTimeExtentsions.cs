@@ -1,7 +1,6 @@
 ﻿using System;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
 
-namespace Services.Extensions
+namespace API.Extensions
 {
     public static class DateTimeExtentsions
     {
