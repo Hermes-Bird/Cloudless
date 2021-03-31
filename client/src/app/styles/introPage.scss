@@ -1,0 +1,40 @@
+﻿.intro-page {
+  background-image: url("../../static/img/bgIntro.svg"), linear-gradient($intro-light, $intro-light-blue);
+  height: 100vh;
+  width: 100vw;
+  background-size: contain;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
+  font-weight: 200;
+  font-size: 3rem;
+  line-height: 6rem;
+  letter-spacing: 0.2rem;
+  
+  &-container {
+    animation: anime ease-out .6s;
+    transform: translateY(-2rem);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 3rem;
+    justify-items: center;
+    align-items: center;
+  }
+  
+  @keyframes anime {
+    from {
+      transform: translateY(2rem) scale(.5);
+      opacity: 0;
+    }
+    
+    to {
+      transform: translateY(-2rem) scale(1);
+      opacity: 1;
+    }
+  }
+}
+
