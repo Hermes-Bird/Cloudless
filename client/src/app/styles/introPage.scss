@@ -8,16 +8,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
+  user-select: none;
 
   font-weight: 200;
-  font-size: 3rem;
+  font-size: 6rem;
   line-height: 6rem;
-  letter-spacing: 0.2rem;
+  letter-spacing: .7rem;
   
   &-container {
-    animation: anime ease-out .6s;
-    transform: translateY(-2rem);
+    animation: scale-up ease-out .6s;
+    transform: translateY(-3rem);
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 3rem;
@@ -25,14 +25,14 @@
     align-items: center;
   }
   
-  @keyframes anime {
+  @keyframes scale-up {
     from {
       transform: translateY(2rem) scale(.5);
       opacity: 0;
     }
     
     to {
-      transform: translateY(-2rem) scale(1);
+      transform: translateY(-3rem) scale(1);
       opacity: 1;
     }
   }

@@ -1,0 +1,13 @@
+button {
+  outline: none;
+  border: none;
+}
+
+.button {
+  border-radius: 15px;
+  letter-spacing: 0.1rem;
+  color: $button-bg;
+  height: 5rem;
+  font-size: 1.8rem;
+  padding: 0 2.5rem;
+}

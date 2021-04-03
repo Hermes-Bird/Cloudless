@@ -4,12 +4,22 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: 10px;
+}
+
 body {
   font-family: 'Montserrat', sans-serif;
-  font-size: 10px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+a {
+  text-decoration: none;
+  color: #000;
+}
+
 @import "variables";
 @import "introPage";
+@import "authPage";
+@import "buttons";

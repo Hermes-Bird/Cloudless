@@ -1,11 +1,13 @@
-import React from 'react';
-import IntroPage from './pages/IntroPage';
-import logo from './img/bgIntro.svg';
+import React from 'react'
+import IntroPage from './pages/IntroPage'
+import logo from './img/bgIntro.svg'
+import AuthPage from './pages/AuthPage'
 
 function App() {
-  return (
-      <IntroPage></IntroPage>
-  );
+    return (
+        <AuthPage/>
+        // <IntroPage/>
+    )
 }
 
-export default App;
+export default App
