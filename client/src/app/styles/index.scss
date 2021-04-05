@@ -6,6 +6,16 @@
 
 html {
   font-size: 10px;
+  font-weight: 300;
+}
+
+*::placeholder{
+  font-weight: inherit;
+  font-size: inherit;
+}
+
+input {
+  font-family: inherit;
 }
 
 body {
@@ -19,7 +29,17 @@ a {
   color: #000;
 }
 
+img {
+  user-select: none;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+}
+
 @import "variables";
 @import "introPage";
 @import "authPage";
 @import "buttons";
+@import "chatsPage";
