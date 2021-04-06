@@ -2,6 +2,7 @@ import React from 'react'
 import Header from '../components/Header'
 import Searchbar from '../components/Searchbar'
 import DialogList from '../components/DialogList'
+import ChatHeader from '../components/ChatHeader'
 
 const temp = () => {}
 
@@ -13,6 +14,7 @@ const ChatsPage = () => {
                 <Searchbar onChange={temp}/>
                 <DialogList/>
             </aside>
+            <ChatHeader/>
         </div>
     )
 }

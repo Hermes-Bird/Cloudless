@@ -1,9 +1,9 @@
 import React from 'react'
 
 
-const Dialog : React.FC<{dialog: any}> = ({dialog}) => {
+const Dialog : React.FC<{dialog: any, active?: boolean}> = ({dialog, active}) => {
     return (
-        <div className="dialog">
+        <div className={`dialog ${active ? 'active' : ''}`}>
             <img className="avatar dialog-avatar" src={dialog.avatar} alt=""/>
             <h4 className="dialog-title">{dialog.title}</h4>
             <p className="dialog-message">{dialog.message}</p>
@@ -21,7 +21,7 @@ const DialogList = () => {
     return (
         <div className="dialog-list">
             <Dialog dialog={dialog}/>
-            <Dialog dialog={dialog}/>
+            <Dialog dialog={dialog} active/>
             <Dialog dialog={dialog}/>
             <Dialog dialog={dialog}/>
             <Dialog dialog={dialog}/>
