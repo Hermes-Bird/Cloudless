@@ -3,6 +3,8 @@ import Header from '../components/Header'
 import Searchbar from '../components/Searchbar'
 import DialogList from '../components/DialogList'
 import ChatHeader from '../components/ChatHeader'
+import SendBox from '../components/SendBox'
+import MessageContainer from '../components/MessageContainer'
 
 const temp = () => {}
 
@@ -14,7 +16,11 @@ const ChatsPage = () => {
                 <Searchbar onChange={temp}/>
                 <DialogList/>
             </aside>
-            <ChatHeader/>
+            <section className="chat-container">
+                <ChatHeader/>
+                <MessageContainer/>
+                <SendBox/>
+            </section>
         </div>
     )
 }
